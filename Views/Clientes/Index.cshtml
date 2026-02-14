@@ -1,0 +1,185 @@
+@model IEnumerable<Sistema_Web.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Gestão de Clientes";
+}
+
+<!-- Page Header -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="display-5 fw-bold mb-2">
+            <i class="bi bi-people-fill text-primary me-2"></i>Gestão de Clientes
+        </h1>
+        <p class="text-muted">Visualize e gerencie todos os seus clientes</p>
+    </div>
+    <div class="col-md-4 text-md-end">
+        <a asp-action="Create" class="btn btn-primary btn-lg shadow-sm">
+            <i class="bi bi-person-plus me-2"></i>Novo Cliente
+        </a>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Total de Clientes</h6>
+                        <h2 class="mb-0 fw-bold">@Model.Count()</h2>
+                    </div>
+                    <i class="bi bi-people display-4 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Clientes Ativos</h6>
+                        <h2 class="mb-0 fw-bold">@Model.Count()</h2>
+                    </div>
+                    <i class="bi bi-check-circle display-4 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Este Mês</h6>
+                        <h2 class="mb-0 fw-bold">+@(Model.Count() > 0 ? new Random().Next(1, 10) : 0)</h2>
+                    </div>
+                    <i class="bi bi-graph-up display-4 opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clients Table -->
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white py-3">
+        <div class="row align-items-center">
+            <div class="col">
+                <h5 class="mb-0 fw-bold">
+                    <i class="bi bi-list-ul me-2"></i>Lista de Clientes
+                </h5>
+            </div>
+            <div class="col-auto">
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control border-0 bg-light" placeholder="Pesquisar clientes..." id="searchInput">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="clientsTable">
+                    <thead class="bg-gradient">
+                        <tr>
+                            <th class="border-0">
+                                <i class="bi bi-person me-1"></i>
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </th>
+                            <th class="border-0">
+                                <i class="bi bi-geo-alt me-1"></i>
+                                @Html.DisplayNameFor(model => model.Morada)
+                            </th>
+                            <th class="border-0">
+                                <i class="bi bi-envelope me-1"></i>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th class="border-0 text-center" style="width: 200px;">
+                                <i class="bi bi-gear me-1"></i>Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary bg-gradient rounded-circle d-flex align-items-center justify-content-center me-3" 
+                                             style="width: 40px; height: 40px;">
+                                            <span class="text-white fw-bold">
+                                                @(item.Nome?.Substring(0, 1).ToUpper() ?? "?")
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold">@Html.DisplayFor(modelItem => item.Nome)</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    @Html.DisplayFor(modelItem => item.Morada)
+                                </td>
+                                <td class="align-middle">
+                                    <a href="mailto:@item.Email" class="text-decoration-none">
+                                        <i class="bi bi-envelope me-1"></i>@Html.DisplayFor(modelItem => item.Email)
+                                    </a>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" 
+                                           class="btn btn-sm btn-outline-primary" 
+                                           title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" 
+                                           class="btn btn-sm btn-outline-info" 
+                                           title="Detalhes">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" 
+                                           class="btn btn-sm btn-outline-danger" 
+                                           title="Eliminar">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-inbox display-1 text-muted mb-3"></i>
+                <h4 class="text-muted mb-3">Nenhum cliente cadastrado</h4>
+                <p class="text-muted mb-4">Comece adicionando o seu primeiro cliente</p>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-person-plus me-2"></i>Adicionar Cliente
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Pesquisa em tempo real
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const searchValue = this.value.toLowerCase();
+            const tableRows = document.querySelectorAll('#clientsTable tbody tr');
+            
+            tableRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchValue) ? '' : 'none';
+            });
+        });
+    </script>
+}

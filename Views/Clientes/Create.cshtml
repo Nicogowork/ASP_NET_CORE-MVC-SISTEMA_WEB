@@ -1,0 +1,143 @@
+@model Sistema_Web.Models.Cliente
+
+@{
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<!-- Page Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" class="text-decoration-none">
+                        <i class="bi bi-people me-1"></i>Clientes
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Novo Cliente</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 fw-bold">
+            <i class="bi bi-person-plus text-primary me-2"></i>Adicionar Novo Cliente
+        </h1>
+        <p class="text-muted">Preencha o formulário abaixo para registar um novo cliente</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Formulário -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-file-text me-2"></i>Dados do Cliente
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div>
+                            Por favor, corrija os erros abaixo.
+                        </div>
+                    </div>
+                    
+                    <!-- Nome -->
+                    <div class="mb-4">
+                        <label asp-for="Nome" class="form-label">
+                            <i class="bi bi-person me-1"></i>@Html.DisplayNameFor(model => model.Nome)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Nome" class="form-control form-control-lg" placeholder="Ex: João Silva" />
+                        <span asp-validation-for="Nome" class="text-danger small"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle me-1"></i>Digite o nome completo do cliente
+                        </div>
+                    </div>
+
+                    <!-- Morada -->
+                    <div class="mb-4">
+                        <label asp-for="Morada" class="form-label">
+                            <i class="bi bi-geo-alt me-1"></i>@Html.DisplayNameFor(model => model.Morada)
+                        </label>
+                        <input asp-for="Morada" class="form-control form-control-lg" placeholder="Ex: Rua Principal, nº 123, Lisboa" />
+                        <span asp-validation-for="Morada" class="text-danger small"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle me-1"></i>Endereço completo do cliente (opcional)
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label">
+                            <i class="bi bi-envelope me-1"></i>@Html.DisplayNameFor(model => model.Email)
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input asp-for="Email" type="email" class="form-control form-control-lg" placeholder="Ex: joao.silva@email.com" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle me-1"></i>Email válido para contacto
+                        </div>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="d-flex gap-2 justify-content-end pt-3 border-top">
+                        <a asp-action="Index" class="btn btn-lg btn-outline-secondary">
+                            <i class="bi bi-x-circle me-2"></i>Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-lg btn-primary">
+                            <i class="bi bi-check-circle me-2"></i>Guardar Cliente
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informação Lateral -->
+    <div class="col-lg-4">
+        <!-- Ajuda -->
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+                <h5 class="card-title fw-bold mb-3">
+                    <i class="bi bi-question-circle text-info me-2"></i>Precisa de Ajuda?
+                </h5>
+                <p class="card-text text-muted small mb-3">
+                    Preencha os campos obrigatórios marcados com <span class="text-danger">*</span>
+                </p>
+                <ul class="list-unstyled small text-muted mb-0">
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle text-success me-2"></i>
+                        Nome completo é obrigatório
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle text-success me-2"></i>
+                        Email válido é obrigatório
+                    </li>
+                    <li class="mb-2">
+                        <i class="bi bi-check-circle text-success me-2"></i>
+                        Morada é opcional
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dicas -->
+        <div class="card border-0 shadow-sm bg-light">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3">
+                    <i class="bi bi-lightbulb text-warning me-2"></i>Dicas
+                </h6>
+                <ul class="small text-muted mb-0 ps-3">
+                    <li class="mb-2">Use emails válidos para facilitar o contacto</li>
+                    <li class="mb-2">Mantenha os dados sempre atualizados</li>
+                    <li class="mb-2">Adicione a morada completa quando possível</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

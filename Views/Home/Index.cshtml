@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="hero-section text-center fade-in">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">
+            <i class="bi bi-globe2"></i> Bem-vindo ao Sistema Web
+        </h1>
+        <p class="lead mb-4">Gestão profissional de clientes e serviços numa única plataforma</p>
+        <div class="d-flex gap-3 justify-content-center">
+            <a asp-controller="Clientes" asp-action="Index" class="btn btn-light btn-lg">
+                <i class="bi bi-people me-2"></i>Ver Clientes
+            </a>
+            <a asp-controller="Home" asp-action="Servicos" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-gear me-2"></i>Nossos Serviços
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="row g-4 my-4">
+    <div class="col-md-4">
+        <div class="card h-100 text-center p-4 fade-in">
+            <div class="feature-icon mx-auto">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title fw-bold mb-3">Gestão de Clientes</h4>
+                <p class="card-text text-muted">
+                    Sistema completo para gerir toda a informação dos seus clientes de forma eficiente e organizada.
+                </p>
+                <a asp-controller="Clientes" asp-action="Index" class="btn btn-primary mt-2">
+                    Aceder <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 text-center p-4 fade-in" style="animation-delay: 0.1s">
+            <div class="feature-icon mx-auto">
+                <i class="bi bi-gear-fill"></i>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title fw-bold mb-3">Serviços Premium</h4>
+                <p class="card-text text-muted">
+                    Oferecemos uma vasta gama de serviços personalizados para atender todas as suas necessidades.
+                </p>
+                <a asp-controller="Home" asp-action="Servicos" class="btn btn-primary mt-2">
+                    Explorar <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 text-center p-4 fade-in" style="animation-delay: 0.2s">
+            <div class="feature-icon mx-auto">
+                <i class="bi bi-briefcase-fill"></i>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title fw-bold mb-3">Portfólio</h4>
+                <p class="card-text text-muted">
+                    Conheça os nossos projetos realizados e veja como podemos ajudar no seu negócio.
+                </p>
+                <a asp-controller="Home" asp-action="Portefolio" class="btn btn-primary mt-2">
+                    Ver Projetos <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="row g-4 my-5">
+    <div class="col-md-3 col-6">
+        <div class="card text-center p-4 border-0 bg-light">
+            <h2 class="display-4 fw-bold text-primary mb-0">500+</h2>
+            <p class="text-muted mb-0">Clientes Ativos</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card text-center p-4 border-0 bg-light">
+            <h2 class="display-4 fw-bold text-primary mb-0">50+</h2>
+            <p class="text-muted mb-0">Projetos Concluídos</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card text-center p-4 border-0 bg-light">
+            <h2 class="display-4 fw-bold text-primary mb-0">10+</h2>
+            <p class="text-muted mb-0">Anos de Experiência</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6">
+        <div class="card text-center p-4 border-0 bg-light">
+            <h2 class="display-4 fw-bold text-primary mb-0">24/7</h2>
+            <p class="text-muted mb-0">Suporte Disponível</p>
+        </div>
+    </div>
+</div>

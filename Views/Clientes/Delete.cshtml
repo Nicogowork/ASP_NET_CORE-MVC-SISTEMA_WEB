@@ -1,0 +1,157 @@
+@model Sistema_Web.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<!-- Page Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" class="text-decoration-none">
+                        <i class="bi bi-people me-1"></i>Clientes
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Eliminar Cliente</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Alerta de Aviso -->
+        <div class="alert alert-danger d-flex align-items-center shadow-sm mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-3 fs-3"></i>
+            <div>
+                <h5 class="alert-heading mb-1">Atenção!</h5>
+                <p class="mb-0">Tem a certeza que deseja eliminar este cliente? Esta ação não pode ser revertida.</p>
+            </div>
+        </div>
+
+        <!-- Card do Cliente -->
+        <div class="card border-0 shadow-sm">
+            <!-- Header -->
+            <div class="card-header bg-danger text-white p-4">
+                <div class="d-flex align-items-center">
+                    <div class="bg-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="bi bi-person-x display-4 text-danger"></i>
+                    </div>
+                    <div>
+                        <h3 class="mb-1 fw-bold">Eliminar Cliente</h3>
+                        <p class="mb-0 opacity-75">Confirme os dados antes de eliminar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corpo -->
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-4 pb-2 border-bottom">
+                    <i class="bi bi-person-lines-fill text-danger me-2"></i>Dados do Cliente
+                </h5>
+
+                <div class="row g-3">
+                    <!-- ID -->
+                    <div class="col-md-4">
+                        <div class="p-3 bg-light rounded">
+                            <label class="text-muted small mb-2 d-block">
+                                <i class="bi bi-hash me-1"></i>ID
+                            </label>
+                            <p class="mb-0 fw-bold h5">#@Model.Id</p>
+                        </div>
+                    </div>
+
+                    <!-- Nome -->
+                    <div class="col-md-8">
+                        <div class="p-3 bg-light rounded">
+                            <label class="text-muted small mb-2 d-block">
+                                <i class="bi bi-person me-1"></i>Nome Completo
+                            </label>
+                            <p class="mb-0 fw-bold h5">@Html.DisplayFor(model => model.Nome)</p>
+                        </div>
+                    </div>
+
+                    <!-- Morada -->
+                    <div class="col-md-12">
+                        <div class="p-3 bg-light rounded">
+                            <label class="text-muted small mb-2 d-block">
+                                <i class="bi bi-geo-alt me-1"></i>Morada
+                            </label>
+                            <p class="mb-0 h6">
+                                @if (!string.IsNullOrEmpty(Model.Morada))
+                                {
+                                    @Html.DisplayFor(model => model.Morada)
+                                }
+                                else
+                                {
+                                    <span class="text-muted fst-italic">Não especificada</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-12">
+                        <div class="p-3 bg-light rounded">
+                            <label class="text-muted small mb-2 d-block">
+                                <i class="bi bi-envelope me-1"></i>Email
+                            </label>
+                            <p class="mb-0 h6">
+                                <a href="mailto:@Model.Email" class="text-decoration-none">
+                                    @Html.DisplayFor(model => model.Email)
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informação Adicional -->
+                <div class="alert alert-warning mt-4 mb-0" role="alert">
+                    <div class="d-flex">
+                        <i class="bi bi-info-circle-fill me-2 mt-1"></i>
+                        <div>
+                            <strong>Importante:</strong> Ao eliminar este cliente, todos os dados associados serão permanentemente removidos do sistema.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer com Ações -->
+            <div class="card-footer bg-white border-top p-4">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2 justify-content-between align-items-center">
+                        <a asp-action="Index" class="btn btn-lg btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>Cancelar
+                        </a>
+                        <div class="d-flex gap-2">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-lg btn-outline-info">
+                                <i class="bi bi-eye me-2"></i>Ver Detalhes
+                            </a>
+                            <button type="submit" class="btn btn-lg btn-danger" onclick="return confirm('Tem a certeza que deseja eliminar este cliente?')">
+                                <i class="bi bi-trash me-2"></i>Confirmar Eliminação
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Card de Ajuda -->
+        <div class="card border-0 bg-light mt-3">
+            <div class="card-body">
+                <h6 class="fw-bold mb-2">
+                    <i class="bi bi-lightbulb text-warning me-2"></i>Alternativas
+                </h6>
+                <ul class="small mb-0 ps-3">
+                    <li>Considere editar os dados do cliente em vez de eliminar</li>
+                    <li>Pode sempre criar um novo registo mais tarde</li>
+                    <li>Certifique-se de ter um backup dos dados importantes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
